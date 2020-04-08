@@ -17,5 +17,5 @@ jobs:
       run: cmake CMakeLists.txt 
     - name: make
       run: |
-        export MACOSX_DEPLOYMENT_TARGET=10.8
+        export MACOSX_DEPLOYMENT_TARGET=10.9
         make
