@@ -9,14 +9,13 @@ on:
 jobs:
   build:
 
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-18.04, ubuntu-16.04]
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v2
     - name: configure
       run: cmake CMakeLists.txt
     - name: make
-      run: make
+      run: |
+        export MACOSX_DEPLOYMENT_TARGET=10.8
+        make
