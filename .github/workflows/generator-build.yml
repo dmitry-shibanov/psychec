@@ -29,4 +29,5 @@ jobs:
         export MACOSX_DEPLOYMENT_TARGET=10.9
         export CMAKE_OSX_SYSROOT=$(xcrun --show-sdk-path)
         echo $CMAKE_OSX_SYSROOT
+        clang --version
         make
