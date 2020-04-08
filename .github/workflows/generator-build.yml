@@ -15,31 +15,19 @@ jobs:
     - uses: actions/checkout@v2
     - name: Exports
       run: |
-        export MACOSX_DEPLOYMENT_TARGET=10.9
+        export MACOSX_DEPLOYMENT_TARGET=10.8
         export CMAKE_OSX_SYSROOT=$(xcrun --show-sdk-path)
-        export CC := /usr/local/opt/llvm/bin/clang
-        export CXX := $(CC)++
-        LDFLAGS += -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib
-        CPPFLAGS += -I/usr/local/opt/llvm/include -I/usr/local/opt/llvm/include/c++/v1/
         echo $CMAKE_OSX_SYSROOT
     - name: configure
       run: |
-        export MACOSX_DEPLOYMENT_TARGET=10.9
+        export MACOSX_DEPLOYMENT_TARGET=10.8
         export CMAKE_OSX_SYSROOT=$(xcrun --show-sdk-path)
         echo $CMAKE_OSX_SYSROOT
-        export CC := /usr/local/opt/llvm/bin/clang
-        export CXX := $(CC)++
-        LDFLAGS += -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib
-        CPPFLAGS += -I/usr/local/opt/llvm/include -I/usr/local/opt/llvm/include/c++/v1/
         cmake CMakeLists.txt 
     - name: make
       run: |
-        export MACOSX_DEPLOYMENT_TARGET=10.9
+        export MACOSX_DEPLOYMENT_TARGET=10.8
         export CMAKE_OSX_SYSROOT=$(xcrun --show-sdk-path)
         echo $CMAKE_OSX_SYSROOT
-        export CC := /usr/local/opt/llvm/bin/clang
-        export CXX := $(CC)++
-        LDFLAGS += -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib
-        CPPFLAGS += -I/usr/local/opt/llvm/include -I/usr/local/opt/llvm/include/c++/v1/
         clang --version
         make
