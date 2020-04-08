@@ -20,8 +20,13 @@ jobs:
         echo $CMAKE_OSX_SYSROOT
     - name: configure
       run: |
-        echo $MACOSX_DEPLOYMENT_TARGET
+        export MACOSX_DEPLOYMENT_TARGET=10.8
+        export CMAKE_OSX_SYSROOT=$(xcrun --show-sdk-path)
         echo $CMAKE_OSX_SYSROOT
         cmake CMakeLists.txt 
     - name: make
-      run: make
+      run: |
+        export MACOSX_DEPLOYMENT_TARGET=10.8
+        export CMAKE_OSX_SYSROOT=$(xcrun --show-sdk-path)
+        echo $CMAKE_OSX_SYSROOT
+        make
