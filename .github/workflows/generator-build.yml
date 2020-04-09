@@ -31,7 +31,7 @@ jobs:
         export CXX="$CC++"
         export CPPFLAGS="-I/usr/local/opt/llvm/include -I/usr/local/opt/llvm@7/include/c++/v1/" 
         export LDFLAGS="-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm@7/lib"
-        make CMakeLists.txt
+        cmake CMakeLists.txt
     - name: make
       run: |
         ./configure
