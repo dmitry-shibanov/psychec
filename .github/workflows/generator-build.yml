@@ -31,7 +31,11 @@ jobs:
         export CXX="$CC++"
         export CPPFLAGS="-I/usr/local/opt/llvm/include -I/usr/local/opt/llvm@9/include/c++/v1/" 
         export LDFLAGS="-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm@9/lib"
+        export AR="/usr/local/opt/llvm@9/bin/llvm-ar"
+        export LD="/usr/local/opt/llvm@9/bin/llvm-ld"
         cmake CMakeLists.txt
     - name: make
       run: |
+        export AR="/usr/local/opt/llvm@9/bin/llvm-ar"
+        export LD="/usr/local/opt/llvm@9/bin/llvm-ld"
         make CXX=/usr/local/opt/llvm@9/bin/clang++ LDFLAGS=-L/usr/local/opt/llvm@9/lib -Wl,-rpath,/usr/local/opt/llvm@9/lib CPPFLAGS=-I/usr/local/opt/llvm@9/include -I/usr/local/opt/llvm@9/include/c++/v1/
