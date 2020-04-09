@@ -28,4 +28,6 @@ jobs:
         export CXX="$CC++"
         cmake CMakeLists.txt
     - name: make
-      run: make CXX=/usr/local/opt/llvm/bin/clang++ LDFLAGS=-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib CPPFLAGS=-I/usr/local/opt/llvm/include -I/usr/local/opt/llvm/include/c++/v1/
+      run: |
+        xcode-select --install
+        make CXX=/usr/local/opt/llvm/bin/clang++ LDFLAGS=-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib CPPFLAGS=-I/usr/local/opt/llvm/include -I/usr/local/opt/llvm/include/c++/v1/
