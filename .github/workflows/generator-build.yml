@@ -34,5 +34,4 @@ jobs:
         cmake CMakeLists.txt
     - name: make
       run: |
-        ./configure
         make CXX=/usr/local/opt/llvm@7/bin/clang++ LDFLAGS=-L/usr/local/opt/llvm@7/lib -Wl,-rpath,/usr/local/opt/llvm@7/lib CPPFLAGS=-I/usr/local/opt/llvm@7/include -I/usr/local/opt/llvm@7/include/c++/v1/
