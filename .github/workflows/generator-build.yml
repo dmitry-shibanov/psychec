@@ -17,6 +17,7 @@ jobs:
       run: |
         brew remove llvm
         brew install llvm@7
+        ls /usr/local/opt/
         brewPath="$(brew --prefix llvm)/bin"
         echo $brewPath
         echo "::add-path::$brewPath"
