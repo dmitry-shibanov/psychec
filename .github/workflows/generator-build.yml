@@ -16,9 +16,9 @@ jobs:
     - name: Switch clang
       run: |
         brew remove llvm
-        brew install llvm@7
+        brew install llvm@9
         ls /usr/local/opt/
-        brewPath="$(brew --prefix llvm@7)/bin"
+        brewPath="$(brew --prefix llvm@9)/bin"
         echo $brewPath
         echo "::add-path::$brewPath"
     - name: Debug
@@ -27,11 +27,11 @@ jobs:
         clang++ --version
     - name: configure
       run: |
-        export CC="/usr/local/opt/llvm@7/bin/clang"
+        export CC="/usr/local/opt/llvm@9/bin/clang"
         export CXX="$CC++"
-        export CPPFLAGS="-I/usr/local/opt/llvm/include -I/usr/local/opt/llvm@7/include/c++/v1/" 
-        export LDFLAGS="-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm@7/lib"
+        export CPPFLAGS="-I/usr/local/opt/llvm/include -I/usr/local/opt/llvm@9/include/c++/v1/" 
+        export LDFLAGS="-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm@9/lib"
         cmake CMakeLists.txt
     - name: make
       run: |
-        make CXX=/usr/local/opt/llvm@7/bin/clang++ LDFLAGS=-L/usr/local/opt/llvm@7/lib -Wl,-rpath,/usr/local/opt/llvm@7/lib CPPFLAGS=-I/usr/local/opt/llvm@7/include -I/usr/local/opt/llvm@7/include/c++/v1/
+        make CXX=/usr/local/opt/llvm@9/bin/clang++ LDFLAGS=-L/usr/local/opt/llvm@9/lib -Wl,-rpath,/usr/local/opt/llvm@9/lib CPPFLAGS=-I/usr/local/opt/llvm@9/include -I/usr/local/opt/llvm@9/include/c++/v1/
