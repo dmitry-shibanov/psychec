@@ -29,8 +29,9 @@ jobs:
       run: |
         export CC="/usr/local/opt/llvm@7/bin/clang"
         export CXX="$CC++"
+        export CPPFLAGS="-I/usr/local/opt/llvm/include -I/usr/local/opt/llvm@7/include/c++/v1/" 
         export LDFLAGS="-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm@7/lib"
-	export CPPFLAGS="-I/usr/local/opt/llvm/include -I/usr/local/opt/llvm@7/include/c++/v1/" cmake CMakeLists.txt
+        make CMakeLists.txt
     - name: make
       run: |
         make CXX=/usr/local/opt/llvm@7/bin/clang++ LDFLAGS=-L/usr/local/opt/llvm@7/lib -Wl,-rpath,/usr/local/opt/llvm@7/lib CPPFLAGS=-I/usr/local/opt/llvm@7/include -I/usr/local/opt/llvm@7/include/c++/v1/
