@@ -1,33 +1,31 @@
 name: generator-build
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  push: 
 
 jobs:
   build:
 
-    runs-on: macos-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macOS-latest]
 
     steps:
     - uses: actions/checkout@v2
-    - name: Exports
+    - name: Switch clang
       run: |
-        export MACOSX_DEPLOYMENT_TARGET=10.8
-        export CMAKE_OSX_SYSROOT=$(xcrun --show-sdk-path)
-        echo $CMAKE_OSX_SYSROOT
+        brewPath="$(brew --prefix llvm)/bin"
+        echo $brewPath
+        echo "::add-path::$brewPath"
+    - name: Debug
+      run: |
+        clang --version
+        clang++ --version
     - name: configure
       run: |
-        export MACOSX_DEPLOYMENT_TARGET=10.8
-        export CMAKE_OSX_SYSROOT=$(xcrun --show-sdk-path)
-        echo $CMAKE_OSX_SYSROOT
-        cmake CMakeLists.txt 
+        export CC="/usr/local/opt/llvm/bin/clang"
+        export CXX="$CC++"
+        cmake CMakeLists.txt
     - name: make
-      run: |
-        export MACOSX_DEPLOYMENT_TARGET=10.8
-        export CMAKE_OSX_SYSROOT=$(xcrun --show-sdk-path)
-        echo $CMAKE_OSX_SYSROOT
-        clang --version
-        make
+      run: make CXX=/usr/local/opt/llvm/bin/clang++ LDFLAGS=-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib
